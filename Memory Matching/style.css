@@ -1,0 +1,182 @@
+/* General Styling */
+body {
+    background: #008080;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-size: 16px; /* Base font size */
+}
+
+.game-container {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    max-width: 95%; /* Increased max-width for larger boards */
+    min-width: 350px;
+}
+
+h1 { margin-bottom: 5px; color: #ffd700; }
+.tagline { margin-top: 0; font-weight: 400; }
+
+/* Screen Management */
+.screen {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+.screen.active { display: block; }
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Start Screen & Input */
+#player-name-input {
+    padding: 10px;
+    border: 2px solid #ff4500;
+    border-radius: 5px;
+    font-size: 1.1em;
+    width: calc(100% - 24px); /* Corrected width for padding */
+    max-width: 300px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.instructions {
+    text-align: left;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+.instructions ul { list-style: disc; margin-left: 20px; }
+
+.mode-selection button, #play-again-btn {
+    background: #ff4500;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 700;
+    transition: background 0.3s;
+}
+.mode-selection button:hover, #play-again-btn:hover { background: #e63900; }
+
+/* Score Panel Fixes */
+.score-panel {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.score-panel span, .score-panel button {
+    margin: 5px 10px; /* Added margin for spacing when wrapped */
+}
+
+.score-panel span { font-size: 1em; font-weight: 700; }
+#player-greeting { font-style: italic; font-weight: 400; color: #ffd700; }
+
+.reset-btn, .home-btn {
+    background: #1e90ff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em; /* Slightly smaller button text */
+    transition: background 0.3s;
+}
+.home-btn { background: #3cb371; }
+.reset-btn:hover { background: #1c7ed6; }
+.home-btn:hover { background: #349c61; }
+
+/* Game Board - Crucial Fixes for Card Sizing */
+.game-board {
+    display: grid;
+    gap: 8px;
+    perspective: 800px; 
+    /* Max width helps keep the game board centered and sized well */
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+/* Card Container */
+.card {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+    
+    /* Dynamic Sizing Fix: Use padding-bottom for aspect ratio */
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; /* Makes the card container a square */
+}
+
+/* Card Face Alignment: This is the critical fix for the flip alignment */
+.card-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    backface-visibility: hidden;
+    font-size: 2.5em; 
+    border: 3px solid #ffd700;
+}
+
+.card.flip { transform: rotateY(180deg); pointer-events: none; }
+.card-front {
+    background-color: #eee;
+    color: #333;
+    transform: rotateY(180deg);
+}
+.card-back { background-color: #1e90ff; color: white; }
+.card.match .card-face { border-color: #3cb371; box-shadow: 0 0 15px #3cb371; }
+
+
+/* Results Screen Styling (Kept mostly the same) */
+#results-screen h2 { color: #ffd700; font-size: 2em; }
+.results-box {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+#final-stats { font-size: 1.4em; font-weight: 700; color: #fff; }
+#cheer-message { font-size: 1.1em; font-style: italic; margin-top: 15px; }
+.trophy { font-size: 4em; display: inline-block; animation: bounce 1.5s infinite alternate ease-in-out, glow 1.5s infinite alternate; }
+
+@keyframes bounce {
+    0% { transform: translateY(0) scale(1); }
+    100% { transform: translateY(-15px) scale(1.1); }
+}
+
+@keyframes glow {
+    0% { filter: drop-shadow(0 0 5px gold); }
+    100% { filter: drop-shadow(0 0 15px #ff4500); }
+}
+
+/* Media Query for smaller screens */
+@media (max-width: 700px) {
+    .game-container { padding: 15px; }
+    .score-panel { justify-content: space-between; }
+    .score-panel span, .score-panel button { margin: 5px; font-size: 0.9em; }
+    .card-face { font-size: 1.5em; } /* Smaller icons for small screens */
+}

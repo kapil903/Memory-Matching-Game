@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trailblazer Match: Dynamic Memory Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Trailblazer Match</h1>
+        <p class="tagline">Find the pairs and unlock the journey!</p>
+
+        <div id="start-screen" class="screen active">
+            <h2>Welcome, Adventurer!</h2>
+            <div class="instructions">
+                <p>What name shall we record for your great expedition?</p>
+                <input type="text" id="player-name-input" placeholder="Enter your name" maxlength="20">
+                
+                <h3 style="margin-top: 20px;">Instructions:</h3>
+                <ul>
+                    <li>Click on any card to flip it over and reveal the hidden adventure icon.</li>
+                    <li>The goal is to find pairs of matching icons.</li>
+                    <li>The game is won when all pairs are found.</li>
+                </ul>
+                <p>Choose your difficulty (Rows x Columns) to start your expedition:</p>
+            </div>
+            
+            <div class="mode-selection">
+                <button class="mode-btn" data-rows="3" data-cols="4">3 x 4 (12 Cards)</button>
+                <button class="mode-btn" data-rows="4" data-cols="4">4 x 4 (16 Cards)</button>
+                <button class="mode-btn" data-rows="4" data-cols="5">4 x 5 (20 Cards)</button>
+                <button class="mode-btn" data-rows="5" data-cols="6">5 x 6 (30 Cards)</button>
+                <button class="mode-btn" data-rows="6" data-cols="6">6 x 6 (36 Cards)</button>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <section class="score-panel">
+                <span id="player-greeting"></span>
+                <span class="moves">Moves: 0</span>
+                <span class="timer">Time: 0s</span>
+                <button class="reset-btn">
+                    <i class="fas fa-redo-alt"></i> Reset
+                </button>
+                <button class="home-btn">
+                    <i class="fas fa-home"></i> Menu
+                </button>
+            </section>
+
+            <div id="game-board" class="game-board">
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen">
+            <h2 id="results-title"></h2>
+            <div class="results-box">
+                <p id="final-stats"></p>
+                <p id="cheer-message"></p>
+            </div>
+            <div class="trophy-animation">
+                <span class="trophy">🏆</span>
+            </div>
+            <button id="play-again-btn" class="mode-btn">Start a New Adventure</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
